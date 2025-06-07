@@ -1,0 +1,19 @@
+async function main() {
+  const [deployer] = await ethers.getSigners();
+  console.log("Deploying with account:", deployer.address);
+
+  const Contract = await ethers.getContractFactory("FreedomDistributor");
+
+  // Replace this with your real Merkle Root (32-byte hash)
+  const merkleRoot = "0x0000000000000000000000000000000000000000000000000000000000000000";
+
+  const contract = await Contract.deploy(merkleRoot);
+  await contract.deployed();
+
+  console.log("FreedomDistributor deployed at:", contract.address);
+}
+
+main().catch((error) => {
+  console.error(error);
+  process.exitCode = 1;
+});
